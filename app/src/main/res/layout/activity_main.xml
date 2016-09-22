@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <Switch
+            android:id="@+id/vpnSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"

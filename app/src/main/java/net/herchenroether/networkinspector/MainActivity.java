@@ -1,14 +1,20 @@
 package net.herchenroether.networkinspector;
 
+import android.content.Intent;
+import android.net.VpnService;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
-import net.herchenroether.networkinspector.utils.Logger;
+import net.herchenroether.networkinspector.vpn.PacketCaptureService;
 
-
+/**
+ * Starting point of the application
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +23,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Switch toggle = (Switch) findViewById(R.id.vpnSwitch);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    prepareVpn();
+                } else {
+                    PacketCaptureService.stopVpnService(getApplicationContext());
+                }
+            }
+        });
     }
 
     @Override
@@ -39,5 +56,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void prepareVpn() {
+        final Intent prepare = VpnService.prepare(this.getApplicationContext());
+        if (prepare != null) {
+            this.startActivityForResult(prepare, 0);
+        } else {
+            onActivityResult(0, RESULT_OK, null);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int request, int result, Intent data) {
+        if (result == RESULT_OK) {
+            PacketCaptureService.startVpnService(getApplicationContext());
+        }
     }
 }
