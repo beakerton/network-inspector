@@ -60,6 +60,11 @@ public class PacketCaptureService extends VpnService {
         closeVPN();
     }
 
+    @Override
+    public void onRevoke() {
+        closeVPN();
+    }
+
     private void closeVPN() {
         mExecutor.shutdownNow();
         try {
