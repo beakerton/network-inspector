@@ -109,20 +109,25 @@ public class PacketCaptureService extends VpnService {
             try {
                 while (!Thread.interrupted()) {
                     // Packets to be sent are queued in this input stream.
-                    //FileInputStream in = new FileInputStream(mInterface.getFileDescriptor());
+                    FileInputStream in = new FileInputStream(mInterface.getFileDescriptor());
                     // Packets received need to be written to this output stream.
-                    //FileOutputStream out = new FileOutputStream(mInterface.getFileDescriptor());
+                    FileOutputStream out = new FileOutputStream(mInterface.getFileDescriptor());
 
                     // Allocate the buffer for a single packet.
-                    //ByteBuffer packet = ByteBuffer.allocate(32767);
+                    ByteBuffer packet = ByteBuffer.allocate(32767);
+
+                    int length = in.read(packet.array());
+                    if (length > 0) {
+                        Logger.info(packet.toString());
+                    }
 
                     Thread.sleep(10);
                 }
             } catch (InterruptedException e) {
                 Logger.info("Interrupted");
-            /*} catch (IOException e) {
+            } catch (IOException e) {
                 Logger.error("IOException");
-                e.printStackTrace();*/
+                e.printStackTrace();
             } finally {
                 closeVPN();
             }

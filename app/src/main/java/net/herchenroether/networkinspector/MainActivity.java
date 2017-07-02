@@ -10,12 +10,17 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import net.herchenroether.networkinspector.utils.Logger;
 import net.herchenroether.networkinspector.vpn.PacketCaptureService;
 
 /**
  * Starting point of the application
  */
 public class MainActivity extends AppCompatActivity {
+    // Used to load the 'networkreader' library on application startup.
+    static {
+        System.loadLibrary("networkreader");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Logger.info("String from native: " + stringFromJNI());
 
         Switch toggle = (Switch) findViewById(R.id.vpnSwitch);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -73,4 +80,10 @@ public class MainActivity extends AppCompatActivity {
             PacketCaptureService.startVpnService(getApplicationContext());
         }
     }
+
+    /**
+     * A native method that is implemented by the 'networkreader' native library,
+     * which is packaged with this application.
+     */
+    public native String stringFromJNI();
 }
