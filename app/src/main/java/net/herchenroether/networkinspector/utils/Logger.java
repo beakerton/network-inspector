@@ -14,6 +14,10 @@ public class Logger {
         Log.i(TAG, text);
     }
 
+    public static void warn(String text) {
+        Log.w(TAG, text);
+    }
+
     public static void error(String text) {
         Log.e(TAG, text);
     }

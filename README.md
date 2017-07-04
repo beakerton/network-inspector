@@ -1,5 +1,12 @@
 # network-inspector
 
+The goal of this project is to provide a simple way to inspect the network requests made by any application on the device.
+
+Attribution
+-----------
+
+* This program uses some of [Netguard's](https://github.com/M66B/NetGuard/) source code to process network requests. [Netguard](https://github.com/M66B/NetGuard/) is licensed under the GNU General Public License version 3.
+
 License
 -------
 

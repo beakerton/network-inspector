@@ -17,7 +17,18 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             src/main/cpp/networkreader.cpp )
+             src/main/cpp/networkreader.cpp
+             src/main/cpp/netguard.h
+             src/main/cpp/netguard.c
+             src/main/cpp/dhcp.c
+             src/main/cpp/dns.c
+             src/main/cpp/icmp.c
+             src/main/cpp/ip.c
+             src/main/cpp/pcap.c
+             src/main/cpp/session.c
+             src/main/cpp/tcp.c
+             src/main/cpp/udp.c
+             src/main/cpp/util.c )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
