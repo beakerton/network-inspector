@@ -95,7 +95,6 @@ public class PacketCaptureService extends VpnService {
                 mInterface = new Builder().addAddress("10.0.0.2", 32)
                         .addRoute("0.0.0.0", 0)
                         .setSession("NetworkInspector")
-                        .addAllowedApplication("com.amazon.avod.thirdpartyclient")
                         .establish();
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
